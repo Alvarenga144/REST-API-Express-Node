@@ -1,19 +1,35 @@
 const express = require('express');
+//const { faker } = require("@faker-js/faker");
 const app = express();
 const port = 3000;
 
 // Ruta por defecto
 app.get('/', (req, res) => {
-  res.send('Mi primer servidor con Express');
+  res.send('Servidor con Express: LEVANTADO');
 });
 // Ruta ejemplo 1
 app.get('/home', (req, res) => {
   res.send('Estamos en Home');
 });
+/*
+
 // Ruta ejemplo 2
 app.get('/products', (req, res) => {
-  res.send('Estamos en Products');
+  const productos = [];
+  for (let i = 0; i < 100; i++) {
+    productos.push({
+      name: faker.name.findName(),
+      price: faker.price(),
+      image: faker.image.imageurl(),
+    });
+  }
+  res.json(productos);
 });
+
+*/
+
+
+
 // Ruta retornando array de objetos
 app.get('/people', (req, res) => {
   res.json([{
@@ -33,6 +49,7 @@ app.get('/people', (req, res) => {
   ]);
 });
 
+// GET PARAMS
 app.get('/people/:id_people', (req, res) => {
   const { id_people } = req.params;
   res.json( {
@@ -44,6 +61,20 @@ app.get('/people/:id_people', (req, res) => {
     address: "Chalatenango, SV",
   })
 });
+
+// Query params
+app.get('/users', (req, res) => {
+  const { limit, offset } = req.query;
+  if (limit && offset) {
+    res.json({
+      limit,
+      offset
+    });
+  } else {
+    res.send('No hay parametros');
+  }
+});
+
 
 app.get('/home/:id_myhome/people/:id_people', (req, res) => {
   const { id_myhome ,id_people } = req.params;
