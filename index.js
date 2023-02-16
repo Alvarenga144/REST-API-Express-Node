@@ -3,6 +3,9 @@ const routerApi = require('./routes/index')
 const app = express();
 const port = 3000;
 
+// Middleware
+app.use(express.json());
+
 routerApi(app);
 
 // Ruta por defecto
