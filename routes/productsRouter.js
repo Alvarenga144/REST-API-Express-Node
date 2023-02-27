@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 // CREAR
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: "Succesfully Created",
     data: body
   })
